@@ -32,7 +32,7 @@ services:
         class: Symfony\Component\Config\Loader\LoaderResolver
         public: false
     harmony_modular.module_manager.doctrine:
-        class: Harmony\Component\ModularRouting\Manager\DoctrineModuleManager
+        class: Harmony\Component\ModularRouting\Doctrine\ModuleManager
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%harmony_modular.module_class%"
