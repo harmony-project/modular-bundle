@@ -14,8 +14,8 @@
   "require": {
     "php": ">=5.5.9",
     "symfony/symfony": "^2.7|^3.0",
-    "symfony-cmf/routing-bundle": "^1.1",
-    "harmony-project/modular-routing": "^1.0@dev"
+    "harmony-project/modular-routing": "^1.0@dev",
+    "symfony-cmf/routing-bundle": "^1.1|^2.0@dev"
   },
   "autoload": {
     "psr-4": {
