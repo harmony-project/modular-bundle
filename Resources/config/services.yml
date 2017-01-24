@@ -61,6 +61,7 @@ services:
             - "%harmony_modular.router.options%"
             - "@router.request_context"
         calls:
+            - ["setConfigCacheFactory", ["@config_cache_factory"]]
             - ["setRoutePrefix", ["%harmony_modular.route_prefix.path%", "%harmony_modular.route_prefix.defaults%", "%harmony_modular.route_prefix.requirements%"]]
     harmony_modular.routing_subscriber:
         class: Harmony\Bundle\ModularBundle\EventListener\RoutingSubscriber
