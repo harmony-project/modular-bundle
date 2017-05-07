@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * RoutingSubscriber
- *
  * Handle events regarding routing.
  *
  * @author Tim Goudriaan <tim@codedmonkey.com>

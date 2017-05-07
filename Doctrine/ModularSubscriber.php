@@ -15,8 +15,6 @@ use Harmony\Component\ModularRouting\Doctrine\ModularSubscriber as BaseSubscribe
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ModularSubscriber
- *
  * Handle events regarding modular entities.
  *
  * @author Tim Goudriaan <tim@codedmonkey.com>

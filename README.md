@@ -11,4 +11,4 @@ This bundle is available as a package in Composer:
 
 Documentation
 -------------
-Learn more about this bundle in the Harmony documentation.
+Learn more about this bundle in the [Harmony documentation](http://harmony-project.io).

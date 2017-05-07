@@ -2,7 +2,6 @@
 
 namespace Harmony\Bundle\ModularBundle\Request;
 
-use Doctrine\ORM\NoResultException;
 use Harmony\Component\ModularRouting\Provider\ProviderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverterConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
@@ -10,9 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
- * ModuleParamConverter
- *
- * todo Unfortunately we can't rely on getCurrentModule() because the onKernelController event
+ * todo unfortunately we can't rely on getCurrentModule() because the onKernelController event
  * seems to fire up after this. For now we load the module again through the provider, but it would
  * be nice if the ModuleManager keeps track of the modules it has already loaded by default to
  * avoid multiple queries.

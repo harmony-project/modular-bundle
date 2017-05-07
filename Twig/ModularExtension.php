@@ -13,7 +13,7 @@ namespace Harmony\Bundle\ModularBundle\Twig;
 use Harmony\Component\ModularRouting\Manager\ModuleManager;
 
 /**
- * ModularExtension
+ * @author Tim Goudriaan <tim@codedmonkey.com>
  */
 class ModularExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {

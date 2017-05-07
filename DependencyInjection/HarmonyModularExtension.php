@@ -16,9 +16,9 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * HarmonyModularExtension
- *
  * Loads and manages the bundle configuration.
+ *
+ * @author Tim Goudriaan <tim@codedmonkey.com>
  */
 class HarmonyModularExtension extends Extension
 {
@@ -35,7 +35,7 @@ class HarmonyModularExtension extends Extension
         }
 
         // Load services
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
         // Set parameters

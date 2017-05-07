@@ -15,9 +15,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * MetadataResourceResolverPass
- *
  * Scans the services tree for resource loaders and adds them to the resource resolver.
+ *
+ * @author Tim Goudriaan <tim@codedmonkey.com>
  */
 class MetadataResourceResolverPass implements CompilerPassInterface
 {
@@ -33,7 +33,7 @@ class MetadataResourceResolverPass implements CompilerPassInterface
         $definition = $container->getDefinition('harmony_modular.metadata.resource_resolver');
         
         foreach ($container->findTaggedServiceIds('harmony_modular.metadata.resource_loader') as $id => $attributes) {
-            $definition->addMethodCall('addLoader', array(new Reference($id)));
+            $definition->addMethodCall('addLoader', [new Reference($id)]);
         }
     }
 }
