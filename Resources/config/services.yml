@@ -4,8 +4,8 @@ parameters:
         debug: "%kernel.debug%"
 
 services:
-    harmony_modular.entity_subscriber:
-        class: Harmony\Bundle\ModularBundle\EventListener\EntitySubscriber
+    harmony_modular.doctrine.modular_subscriber:
+        class: Harmony\Bundle\ModularBundle\Doctrine\ModularSubscriber
         arguments:
             - "@service_container"
             - "%harmony_modular.module_class%"
