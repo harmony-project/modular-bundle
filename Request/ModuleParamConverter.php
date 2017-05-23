@@ -1,31 +1,36 @@
 <?php
+/*
+ * This file is part of the Harmony package.
+ *
+ * (c) Tim Goudriaan <tim@harmony-project.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Harmony\Bundle\ModularBundle\Request;
 
-use Harmony\Component\ModularRouting\Provider\ProviderInterface;
+use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverterConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
- * todo unfortunately we can't rely on getCurrentModule() because the onKernelController event
- * seems to fire up after this. For now we load the module again through the provider, but it would
- * be nice if the ModuleManager keeps track of the modules it has already loaded by default to
- * avoid multiple queries.
+ * Match the module argument of the controller
  *
  * @author Tim Goudriaan <tim@codedmonkey.com>
  */
 class ModuleParamConverter implements ParamConverterInterface
 {
     /**
-     * @var ProviderInterface
+     * @var ModuleManagerInterface
      */
-    protected $provider;
+    protected $manager;
 
-    public function __construct(ProviderInterface $provider)
+    public function __construct(ModuleManagerInterface $manager)
     {
-        $this->provider = $provider;
+        $this->manager = $manager;
     }
 
     /**
@@ -38,7 +43,7 @@ class ModuleParamConverter implements ParamConverterInterface
     {
         $name = $configuration->getName();
 
-        $object = $this->provider->loadModuleByRequest($request);
+        $object = $this->manager->getCurrentModule();
         $request->attributes->set($name, $object);
 
         return true;

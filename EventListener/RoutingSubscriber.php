@@ -43,7 +43,7 @@ class RoutingSubscriber extends BaseSubscriber implements EventSubscriberInterfa
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::CONTROLLER => 'onKernelController',
+            KernelEvents::REQUEST => [['onKernelRequest', 16]],
         ];
     }
 }
