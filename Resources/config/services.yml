@@ -51,6 +51,7 @@ services:
   harmony_modular.param_converter.modular:
     class: Harmony\Bundle\ModularBundle\Request\ModularParamConverter
     arguments:
+      - "@doctrine"
       - "@harmony_modular.module_manager"
     tags:
       - { name: request.param_converter, priority: 1, converter: harmony_modular_param_converter }
