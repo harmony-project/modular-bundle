@@ -13,6 +13,7 @@ namespace Harmony\Bundle\ModularBundle\Request;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NoResultException;
 use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
+use Harmony\Component\ModularRouting\Model\ModularRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverterConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
@@ -116,11 +117,13 @@ class ModularParamConverter extends DoctrineParamConverter implements ParamConve
         $em         = $this->getManager($options['entity_manager'], $configuration->getClass());
         $repository = $em->getRepository($configuration->getClass());
 
-        /**
-         * todo this is a temporary solution and a break point if the trait is not directly inherited. Currently no
-         * problems have arisen but it could be improved by introducing ModularRepositoryInterface.
-         */
-        return array_key_exists('Harmony\Component\ModularRouting\Doctrine\ModularRepositoryTrait', class_uses($repository));
+        if (!$repository instanceof ModularRepositoryInterface) {
+            return false;
+        }
+
+        $metadata = $em->getClassMetadata($configuration->getClass());
+
+        return $metadata->hasField('module');
     }
 
     private function getManager($name, $class)
