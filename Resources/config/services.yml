@@ -76,10 +76,3 @@ services:
       - "@service_container"
     tags:
       - { name: kernel.event_subscriber, priority: 100 }
-  harmony_modular.twig_extension:
-    class: Harmony\Bundle\ModularBundle\Twig\ModularExtension
-    arguments:
-      - "@harmony_modular.module_manager"
-    public: false
-    tags:
-      - { name: twig.extension }
