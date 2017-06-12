@@ -123,7 +123,7 @@ class ModularParamConverter extends DoctrineParamConverter implements ParamConve
 
         $metadata = $em->getClassMetadata($configuration->getClass());
 
-        return $metadata->hasField('module');
+        return $metadata->hasAssociation('module');
     }
 
     private function getManager($name, $class)
