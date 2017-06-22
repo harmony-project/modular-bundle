@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Scans the services tree for resource loaders and adds them to the resource resolver.
  *
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class MetadataResourceResolverPass implements CompilerPassInterface
 {

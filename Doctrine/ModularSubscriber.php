@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Handle events regarding modular entities.
  *
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class ModularSubscriber extends BaseSubscriber implements EventSubscriber
 {
@@ -35,7 +35,10 @@ class ModularSubscriber extends BaseSubscriber implements EventSubscriber
         $this->container   = $container;
         $this->moduleClass = $moduleClass;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
     public function getModuleManager()
     {
         return $this->container->get('harmony_modular.module_manager');

@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * This class validates and merges configuration for the bundle.
  *
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class Configuration implements ConfigurationInterface
 {

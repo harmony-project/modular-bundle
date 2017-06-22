@@ -1,7 +1,7 @@
 ModularBundle
 =============
 
-The ModularBundle provides an integrated implementation of the Harmony Modular Routing component for the Symfony framework. This bundle relies on the Symfony CMF RoutingBundle to create a chain of routers to avoid replacing the default Router.
+ModularBundle provides an integrated implementation of the Harmony ModularRouting component for the Symfony framework. This bundle relies on Symfony CMF RoutingBundle to create a chain of routers to avoid replacing the default Router.
 
 Installation
 ------------

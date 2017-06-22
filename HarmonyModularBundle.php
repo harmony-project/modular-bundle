@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class HarmonyModularBundle extends Bundle
 {

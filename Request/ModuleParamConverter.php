@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
- * Match the module argument of the controller
+ * Match the module argument of the controller.
  *
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class ModuleParamConverter implements ParamConverterInterface
 {
@@ -28,6 +28,9 @@ class ModuleParamConverter implements ParamConverterInterface
      */
     protected $manager;
 
+    /**
+     * @param ModuleManagerInterface $manager
+     */
     public function __construct(ModuleManagerInterface $manager)
     {
         $this->manager = $manager;

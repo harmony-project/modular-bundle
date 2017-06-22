@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * Loads and manages the bundle configuration.
  *
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class HarmonyModularExtension extends Extension
 {
@@ -29,7 +29,7 @@ class HarmonyModularExtension extends Extension
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        // disable the bundle if no module class is specified
+        // Disable the bundle if no module class is specified
         if (!$config['module_class']) {
             return;
         }
@@ -83,6 +83,7 @@ class HarmonyModularExtension extends Extension
     private function setupServices(array $config, ContainerBuilder $container)
     {
         // Define a different default module manager when using the default StaticModule class
+        // If you choose to extend the StaticModule class, make sure to change this manually
         $static = 'Harmony\Component\ModularRouting\Model\StaticModule' == $config['module_class'];
         $defaultManagerService = !$static ? 'harmony_modular.module_manager.doctrine' : 'harmony_modular.module_manager.static';
 

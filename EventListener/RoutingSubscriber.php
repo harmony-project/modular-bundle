@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Handle events regarding routing.
  *
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class RoutingSubscriber extends BaseSubscriber implements EventSubscriberInterface
 {
@@ -27,11 +27,17 @@ class RoutingSubscriber extends BaseSubscriber implements EventSubscriberInterfa
         $this->container = $container;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getModuleManager()
     {
         return $this->container->get('harmony_modular.module_manager');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getModularRouter()
     {
         return $this->container->get('harmony_modular.router');

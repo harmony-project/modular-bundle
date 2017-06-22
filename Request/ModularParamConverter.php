@@ -11,6 +11,7 @@
 namespace Harmony\Bundle\ModularBundle\Request;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\NoResultException;
 use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
 use Harmony\Component\ModularRouting\Model\ModularRepositoryInterface;
@@ -20,9 +21,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInte
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Match the any modular (entity) argument of the controller
+ * Match any modular (entity) argument of the controller.
  *
- * @author Tim Goudriaan <tim@codedmonkey.com>
+ * @author Tim Goudriaan <tim@harmony-project.io>
  */
 class ModularParamConverter extends DoctrineParamConverter implements ParamConverterInterface
 {
@@ -31,6 +32,10 @@ class ModularParamConverter extends DoctrineParamConverter implements ParamConve
      */
     protected $manager;
 
+    /**
+     * @param ManagerRegistry|null   $registry
+     * @param ModuleManagerInterface $manager
+     */
     public function __construct(ManagerRegistry $registry = null, ModuleManagerInterface $manager)
     {
         $this->manager = $manager;
@@ -126,6 +131,12 @@ class ModularParamConverter extends DoctrineParamConverter implements ParamConve
         return $metadata->hasAssociation('module');
     }
 
+    /**
+     * @param string|null $name
+     * @param string      $class
+     *
+     * @return ObjectManager|null
+     */
     private function getManager($name, $class)
     {
         if (null === $name) {
