@@ -22,7 +22,13 @@ services:
     class: Symfony\Component\Config\Loader\DelegatingLoader
     arguments:
       - "@harmony_modular.metadata.resource_resolver"
-  harmony_modular.metadata.resource_loader.yml:
+  harmony_modular.metadata.resource_loader.xml:
+    class: Harmony\Component\ModularRouting\Metadata\Loader\XmlFileLoader
+    arguments:
+      - "@file_locator"
+    tags:
+      - { name: harmony_modular.metadata.resource_loader }
+  harmony_modular.metadata.resource_loader.yaml:
     class: Harmony\Component\ModularRouting\Metadata\Loader\YamlFileLoader
     arguments:
       - "@file_locator"
