@@ -65,7 +65,6 @@ services:
     class: Harmony\Component\ModularRouting\Provider\SegmentProvider
     arguments:
       - "@harmony_modular.module_manager"
-      - "%harmony_modular.module_identifier%"
   harmony_modular.router:
     class: Harmony\Component\ModularRouting\ModularRouter
     arguments:
