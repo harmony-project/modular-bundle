@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Harmony\\Bundle\\ModularBundle\\": ""
+      "Harmony\\Bundle\\ModularBundle\\": "source/"
     }
   },
   "extra": {
