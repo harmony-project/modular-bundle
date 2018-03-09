@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\NoResultException;
 use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
-use Harmony\Component\ModularRouting\Model\ModularRepositoryInterface;
+use Harmony\Component\ModularRouting\Repository\ModularRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverterConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;

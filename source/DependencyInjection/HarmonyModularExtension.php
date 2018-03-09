@@ -10,6 +10,7 @@
 
 namespace Harmony\Bundle\ModularBundle\DependencyInjection;
 
+use Harmony\Component\ModularRouting\StaticModule;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
@@ -84,7 +85,7 @@ class HarmonyModularExtension extends Extension
     {
         // Define a different default module manager when using the default StaticModule class
         // If you choose to extend the StaticModule class, make sure to change this manually
-        $static = 'Harmony\Component\ModularRouting\Model\StaticModule' == $config['module_class'];
+        $static = $config['module_class'] == StaticModule::class;
         $defaultManagerService = !$static ? 'harmony_modular.module_manager.doctrine' : 'harmony_modular.module_manager.static';
 
         // Set module manager service alias

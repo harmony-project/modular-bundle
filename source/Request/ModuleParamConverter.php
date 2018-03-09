@@ -11,6 +11,7 @@
 namespace Harmony\Bundle\ModularBundle\Request;
 
 use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
+use Harmony\Component\ModularRouting\ModuleInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter as ParamConverterConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,6 +58,6 @@ class ModuleParamConverter implements ParamConverterInterface
      */
     public function supports(ParamConverterConfiguration $configuration)
     {
-        return 'Harmony\Component\ModularRouting\Model\ModuleInterface' == $configuration->getClass();
+        return $configuration->getClass() == ModuleInterface::class;
     }
 }

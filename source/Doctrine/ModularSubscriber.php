@@ -11,7 +11,7 @@
 namespace Harmony\Bundle\ModularBundle\Doctrine;
 
 use Doctrine\Common\EventSubscriber;
-use Harmony\Component\ModularRouting\Doctrine\ModularSubscriber as BaseSubscriber;
+use Harmony\Component\ModularRouting\Bridge\Doctrine\EventListener\ModularSubscriber as BaseSubscriber;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
