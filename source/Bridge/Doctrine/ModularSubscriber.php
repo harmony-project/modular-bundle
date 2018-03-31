@@ -16,7 +16,7 @@ use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
 use Psr\Container\ContainerInterface;
 
 /**
- * Handle events regarding modular entities.
+ * Handles Doctrine events regarding modular entities.
  *
  * @author Tim Goudriaan <tim@harmony-project.io>
  */

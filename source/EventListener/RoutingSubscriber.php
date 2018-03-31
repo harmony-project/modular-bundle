@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Handle events regarding routing.
+ * Handles events regarding modular routing.
  *
  * @author Tim Goudriaan <tim@harmony-project.io>
  */
