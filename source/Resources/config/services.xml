@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container
+  xmlns="http://symfony.com/schema/dic/services"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+
+  <parameters>
+    <parameter key="harmony_modular.router.options" type="collection">
+      <parameter key="cache_dir">%kernel.cache_dir%/modular</parameter>
+      <parameter key="debug">%kernel.debug%</parameter>
+    </parameter>
+    
+  </parameters>
+
+  <services>
+    <defaults public="false"/>
+
+    <service id="Harmony\Component\ModularRouting\ModularRouter">
+      <argument type="service" id="Harmony\Component\ModularRouting\Provider\ProviderInterface"/>
+      <argument type="service" id="Harmony\Component\ModularRouting\Metadata\MetadataFactory"/>
+      <argument>%harmony_modular.router.options%</argument>
+      <argument type="service" id="router.request_context"/>
+      <call method="setConfigCacheFactory">
+        <argument type="service" id="config_cache_factory"/>
+      </call>
+      <call method="setRoutePrefix">
+        <argument>%harmony_modular.route_prefix.path%</argument>
+        <argument>%harmony_modular.route_prefix.defaults%</argument>
+        <argument>%harmony_modular.route_prefix.requirements%</argument>
+      </call>
+      <tag name="router" priority="50"/>
+    </service>
+
+    <!-- Module managers -->
+    <service id="Harmony\Component\ModularRouting\Manager\ModuleManagerInterface"/>
+
+    <service id="Harmony\Component\ModularRouting\Manager\StaticModuleManager">
+      <argument>%harmony_modular.module_class%</argument>
+    </service>
+
+    <service id="Harmony\Component\ModularRouting\Bridge\Doctrine\Manager\ModuleManager">
+      <argument type="service" id="doctrine.orm.entity_manager"/>
+      <argument>%harmony_modular.module_class%</argument>
+      <call method="setModularIdentifier">
+        <argument>%harmony_modular.module_identifier%</argument>
+      </call>
+    </service>
+
+    <!-- Metadata factory -->
+    <service id="Harmony\Component\ModularRouting\Metadata\MetadataFactoryInterface"/>
+
+    <service id="Harmony\Component\ModularRouting\Metadata\MetadataFactory">
+      <argument type="service" id="harmony_modular.metadata.resource_loader"/>
+      <argument type="service" id="routing.loader"/>
+      <argument>%harmony_modular.router.resource%</argument>
+      <argument>%harmony_modular.router.resource_type%</argument>
+    </service>
+
+    <service id="Harmony\Component\ModularRouting\Metadata\Loader\XmlFileLoader">
+      <argument type="service" id="file_locator"/>
+      <tag name="harmony_modular.metadata.resource_loader"/>
+    </service>
+
+    <service id="Harmony\Component\ModularRouting\Metadata\Loader\YamlFileLoader">
+      <argument type="service" id="file_locator"/>
+      <tag name="harmony_modular.metadata.resource_loader"/>
+    </service>
+
+    <service id="harmony_modular.metadata.resource_loader" class="Symfony\Component\Config\Loader\DelegatingLoader">
+      <argument type="service" id="harmony_modular.metadata.resource_resolver"/>
+    </service>
+
+    <service id="harmony_modular.metadata.resource_resolver" class="Symfony\Component\Config\Loader\LoaderResolver"/>
+
+    <!-- Providers -->
+    <service id="Harmony\Component\ModularRouting\Provider\ProviderInterface"/>
+
+    <service id="Harmony\Component\ModularRouting\Provider\SegmentProvider">
+      <argument type="service" id="Harmony\Component\ModularRouting\Manager\ModuleManagerInterface"/>
+    </service>
+
+    <!-- Event listeners -->
+    <service id="Harmony\Bundle\ModularBundle\EventListener\RoutingSubscriber">
+      <argument type="service">
+        <service class="Symfony\Component\DependencyInjection\ServiceLocator">
+          <argument type="collection">
+            <argument type="service" key="Harmony\Component\ModularRouting\Manager\ModuleManagerInterface" id="Harmony\Component\ModularRouting\Manager\ModuleManagerInterface"/>
+            <argument type="service" key="Harmony\Component\ModularRouting\ModularRouter" id="Harmony\Component\ModularRouting\ModularRouter"/>
+          </argument>
+          <tag name="container.service_locator"/>
+        </service>
+      </argument>
+      <tag name="kernel.event_subscriber" priority="100"/>
+    </service>
+
+    <service id="Harmony\Bundle\ModularBundle\Bridge\Doctrine\ModularSubscriber">
+      <argument type="service">
+        <service class="Symfony\Component\DependencyInjection\ServiceLocator">
+          <argument type="collection">
+            <argument type="service" key="Harmony\Component\ModularRouting\Manager\ModuleManagerInterface" id="Harmony\Component\ModularRouting\Manager\ModuleManagerInterface"/>
+          </argument>
+          <tag name="container.service_locator"/>
+        </service>
+      </argument>
+      <argument>%harmony_modular.module_class%</argument>
+      <tag name="doctrine.event_subscriber"/>
+    </service>
+
+    <!-- Parameter converters -->
+    <service id="Harmony\Bundle\ModularBundle\Request\ModuleParamConverter">
+      <argument type="service" id="harmony_modular.module_manager"/>
+      <tag name="request.param_converter" priority="-1" converter="harmony_module_param_converter"/>
+    </service>
+
+    <service id="Harmony\Bundle\ModularBundle\Request\ModularParamConverter">
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="harmony_modular.module_manager"/>
+      <tag name="request.param_converter" priority="-1" converter="harmony_modular_param_converter"/>
+    </service>
+
+    <!-- Service aliases -->
+    <service id="harmony_modular.router" alias="Harmony\Component\ModularRouting\ModularRouter"/>
+    <service id="harmony_modular.module_manager" alias="Harmony\Component\ModularRouting\Manager\ModuleManagerInterface"/>
+    <service id="harmony_modular.provider" alias="Harmony\Component\ModularRouting\Provider\ProviderInterface"/>
+  </services>
+</container>

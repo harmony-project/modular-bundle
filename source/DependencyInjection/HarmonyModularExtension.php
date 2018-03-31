@@ -10,10 +10,15 @@
 
 namespace Harmony\Bundle\ModularBundle\DependencyInjection;
 
+use Harmony\Component\ModularRouting\Bridge\Doctrine\Manager\ModuleManager as DoctrineModuleManager;
+use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
+use Harmony\Component\ModularRouting\Manager\StaticModuleManager;
+use Harmony\Component\ModularRouting\Provider\ProviderInterface;
+use Harmony\Component\ModularRouting\Provider\SegmentProvider;
 use Harmony\Component\ModularRouting\StaticModule;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -36,8 +41,11 @@ class HarmonyModularExtension extends Extension
         }
 
         // Load services
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new XmlFileLoader(
+            $container,
+            new FileLocator(__DIR__.'/../Resources/config')
+        );
+        $loader->load('services.xml');
 
         // Set parameters
         $container->setParameter('harmony_modular.module_class', $config['module_class']);
@@ -86,16 +94,16 @@ class HarmonyModularExtension extends Extension
         // Define a different default module manager when using the default StaticModule class
         // If you choose to extend the StaticModule class, make sure to change this manually
         $static = $config['module_class'] == StaticModule::class;
-        $defaultManagerService = !$static ? 'harmony_modular.module_manager.doctrine' : 'harmony_modular.module_manager.static';
+        $defaultManagerService = !$static ? DoctrineModuleManager::class : StaticModuleManager::class;
 
         // Set module manager service alias
         $managerService = $config['service']['module_manager'] ?: $defaultManagerService;
 
-        $container->setAlias('harmony_modular.module_manager', $managerService);
+        $container->setAlias(ModuleManagerInterface::class, $managerService);
 
         // Set provider service alias
-        $providerService = $config['service']['provider'] ?: 'harmony_modular.provider.segment';
+        $providerService = $config['service']['provider'] ?: SegmentProvider::class;
 
-        $container->setAlias('harmony_modular.provider', $providerService);
+        $container->setAlias(ProviderInterface::class, $providerService);
     }
 }

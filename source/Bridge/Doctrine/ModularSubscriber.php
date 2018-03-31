@@ -8,11 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Harmony\Bundle\ModularBundle\Doctrine;
+namespace Harmony\Bundle\ModularBundle\Bridge\Doctrine;
 
 use Doctrine\Common\EventSubscriber;
 use Harmony\Component\ModularRouting\Bridge\Doctrine\EventListener\ModularSubscriber as BaseSubscriber;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Handle events regarding modular entities.
@@ -27,7 +28,7 @@ class ModularSubscriber extends BaseSubscriber implements EventSubscriber
     private $container;
 
     /**
-     * @param ContainerInterface $container   Service container
+     * @param ContainerInterface $container
      * @param string             $moduleClass
      */
     public function __construct(ContainerInterface $container, $moduleClass)
@@ -41,6 +42,6 @@ class ModularSubscriber extends BaseSubscriber implements EventSubscriber
      */
     public function getModuleManager()
     {
-        return $this->container->get('harmony_modular.module_manager');
+        return $this->container->get(ModuleManagerInterface::class);
     }
 }

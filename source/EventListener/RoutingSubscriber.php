@@ -3,7 +3,9 @@
 namespace Harmony\Bundle\ModularBundle\EventListener;
 
 use Harmony\Component\ModularRouting\EventListener\RoutingSubscriber as BaseSubscriber;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Harmony\Component\ModularRouting\Manager\ModuleManagerInterface;
+use Harmony\Component\ModularRouting\ModularRouter;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -20,7 +22,7 @@ class RoutingSubscriber extends BaseSubscriber implements EventSubscriberInterfa
     private $container;
 
     /**
-     * @param ContainerInterface $container Service container
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -32,7 +34,7 @@ class RoutingSubscriber extends BaseSubscriber implements EventSubscriberInterfa
      */
     public function getModuleManager()
     {
-        return $this->container->get('harmony_modular.module_manager');
+        return $this->container->get(ModuleManagerInterface::class);
     }
 
     /**
@@ -40,7 +42,7 @@ class RoutingSubscriber extends BaseSubscriber implements EventSubscriberInterfa
      */
     public function getModularRouter()
     {
-        return $this->container->get('harmony_modular.router');
+        return $this->container->get(ModularRouter::class);
     }
 
     /**
