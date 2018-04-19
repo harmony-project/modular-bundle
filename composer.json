@@ -1,6 +1,5 @@
 {
   "name": "harmony-project/modular-bundle",
-  "type": "library",
   "description": "Integrates the Harmony Modular Routing component into the full-stack Symfony framework",
   "keywords": ["routing", "database", "symfony"],
   "homepage": "http://harmony-project.io",
@@ -11,6 +10,12 @@
       "homepage": "http://codedmonkey.com"
     }
   ],
+  "support": {
+    "docs": "http://harmony-project.io/docs/modular-bundle",
+    "issues": "https://github.com/harmony-project/modular-bundle/issues",
+    "source": "https://github.com/harmony-project/modular-bundle"
+  },
+  "type": "symfony-bundle",
   "require": {
     "php": "^7.1",
     "harmony-project/modular-routing": "^0.1",
@@ -35,7 +40,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0-dev"
+      "dev-master": "0.1.x-dev"
     }
   }
 }
