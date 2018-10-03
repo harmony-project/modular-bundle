@@ -9,7 +9,7 @@ a chain of routers to extend Symfony's routing capabilities.
 ## Installation
 This bundle is available as a package on [Packagist](https://packagist.org):
 
-    composer require harmony-project/modular-bundle
+    composer require symfony-cmf/routing-bundle harmony-project/modular-bundle
 
 ## Resources
 * [GitHub repository](https://github.com/harmony-project/modular-bundle)
