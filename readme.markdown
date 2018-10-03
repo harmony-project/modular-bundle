@@ -6,6 +6,9 @@ into the full-stack [Symfony](https://symfony.com) framework. This bundle relies
 on [CmfRoutingBundle](https://github.com/symfony-cmf/routing-bundle) by creating
 a chain of routers to extend Symfony's routing capabilities.
 
+Also check out [HarmonyModularExtraBundle](https://github.com/harmony-project/modular-extra-bundle)
+for further integration of your modules in the Symfony framework.
+
 ## Installation
 This bundle is available as a package on [Packagist](https://packagist.org):
 
@@ -24,6 +27,7 @@ This bundle is available as a package on [Packagist](https://packagist.org):
 
 * [Harmony ModularRouting](https://github.com/harmony-project/modular-routing)
 * [Symfony CmfRoutingBundle](https://github.com/symfony-cmf/routing-bundle)
+* [HarmonyModularExtraBundle](https://github.com/harmony-project/modular-extra-bundle)
 
 ## License
 This bundle is released under the [MIT license](https://github.com/harmony-project/modular-bundle/blob/master/license).
